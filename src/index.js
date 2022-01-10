@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use(require('./routes/index'))
-app.use(require('./routes/users'))
+app.use('/users', require('./routes/users'))
 
 // starting the server
 app.listen(app.get('port'), () => {
