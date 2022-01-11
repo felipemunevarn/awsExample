@@ -4,16 +4,16 @@ const router = Router();
 const User = require('../models/user');
 
 router.get('/signin', async (req, res) => {
-    const user = await User.find();
-    console.log("usuarios:", user);
-    res.status(200).json("received");
+    const users = await User.find();
+    res.status(200).json(users);
 });
 
 router.post('/signin', async (req, res) => {
-    const { name, email, permissions } = req.body;
+    const { name, email, age, gender, personalDescription } = req.body;
     const usuario = await User.find().sort({id: -1}).limit(1);
     const id = usuario.length ? usuario[0].id + 1 : 1;
-    const user = new User({name, id, email, permissions});
+    const permissions = 'user';
+    const user = new User({name, id, email, permissions, age, gender, personalDescription });
     await user.save();
     res.status(200).json({status: 'user saved'});
 })
